@@ -20,9 +20,16 @@ class PrinterServer(private val context: Service, port: Int, private val printer
         if (message != null) {
             Log.d("WebSocket", "Received: $message")
             try {
-                val transaction = Gson().fromJson(message, Transaction::class.java)
-                val invoice = Invoice(printer, transaction)
-                invoice.print()
+                val printRequest = Gson().fromJson(message, PrintRequest::class.java)
+
+                if (printRequest.type == PrintType.INVOICE) {
+                    val invoice = Invoice(printer, printRequest.transaction)
+                    invoice.print()
+                } else if (printRequest.type == PrintType.ORDER_SLIP) {
+                    val orderSlip = OrderSlip(printer, printRequest.transaction)
+                    orderSlip.print()
+                }
+
                 Thread.sleep(1000)
             } catch (e: Exception) {
                 Log.e("WebSocket", "Cannot Print", e)
