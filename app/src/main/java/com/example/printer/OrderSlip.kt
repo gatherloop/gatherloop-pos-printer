@@ -9,7 +9,7 @@ class OrderSlip(val printer: Printer, val transaction: Transaction) {
         printer.printTextLine("------------------------------", Align.CENTER)
 
         transaction.items.forEach { item ->
-            printer.printTextLine(item.name, Align.LEFT, true)
+            printer.printTextLine("${item.name} x ${item.amount}", Align.LEFT, true)
             printer.feed()
         }
 
