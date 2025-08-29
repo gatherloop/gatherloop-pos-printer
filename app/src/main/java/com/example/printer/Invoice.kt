@@ -31,8 +31,22 @@ class Invoice(val printer: Printer, val transaction: Transaction) {
             printer.feed()
         }
 
-        printer.printTextTwoColumn("Total", "Rp. ${transaction.getTotal()}")
-        printer.feed()
+        if (transaction.coupons.isNotEmpty()) {
+            printer.printTextTwoColumn("Subtotal", "Rp. ${transaction.getTotal()}")
+            printer.feed()
+            printer.printTextLine("Diskon")
+            transaction.coupons.forEachIndexed { index, coupon ->
+                printer.printTextTwoColumn(coupon.code, "- Rp. ${transaction.getDiscountAmountAtIndex(index)}")
+            }
+            printer.feed()
+        }
+
+        printer.printTextTwoColumn("Total", "Rp. ${transaction.getTotalWithDiscount()}")
+
+        if (!transaction.isCashless) {
+            printer.printTextTwoColumn("Uang", "Rp. ${transaction.paidAmount}")
+            printer.printTextTwoColumn("Kembalian", "Rp. ${transaction.getChangeMoney()}")
+        }
 
         printer.printTextLine("------------------------------", Align.CENTER)
         printer.printTextLine("Terimakasih Kak ${transaction.name}", Align.CENTER)

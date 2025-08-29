@@ -2,10 +2,13 @@ package com.example.printer
 
 class OrderSlip(val printer: Printer, val transaction: Transaction) {
     fun print() {
-        printer.printTextLine("Nama", Align.CENTER, true)
-        printer.printTextLine(transaction.name, Align.CENTER)
-        printer.printTextLine("Waktu Transaksi", Align.CENTER, true)
-        printer.printTextLine(transaction.createdAt, Align.CENTER)
+        printer.feed()
+        printer.feed()
+
+        printer.printTextLine("Nama", Align.CENTER, )
+        printer.printTextLine(transaction.name, Align.CENTER, true)
+        printer.printTextLine("Waktu Transaksi", Align.CENTER, )
+        printer.printTextLine(transaction.createdAt, Align.CENTER, true)
         printer.printTextLine("------------------------------", Align.CENTER)
 
         transaction.items.forEach { item ->
@@ -13,7 +16,6 @@ class OrderSlip(val printer: Printer, val transaction: Transaction) {
             printer.feed()
         }
 
-        printer.feed()
         printer.feed()
         printer.feed()
     }
