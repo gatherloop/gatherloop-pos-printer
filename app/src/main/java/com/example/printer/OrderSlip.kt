@@ -5,10 +5,9 @@ class OrderSlip(val printer: Printer, val transaction: Transaction) {
         printer.feed()
         printer.feed()
 
-        printer.printTextLine("Nama", Align.CENTER, )
-        printer.printTextLine(transaction.name, Align.CENTER, true)
-        printer.printTextLine("Waktu Transaksi", Align.CENTER, )
-        printer.printTextLine(transaction.createdAt, Align.CENTER, true)
+        printer.printTextTwoColumn("Nama", transaction.name)
+        printer.printTextTwoColumn("No. Order", transaction.orderNumber.toString())
+        printer.printTextTwoColumn("Waktu Transaksi", transaction.createdAt)
         printer.printTextLine("------------------------------", Align.CENTER)
 
         transaction.items.forEach { item ->

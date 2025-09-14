@@ -4,6 +4,7 @@ data class Transaction(
     val createdAt: String,
     val paidAt: String?,
     val name: String,
+    val orderNumber: Int,
     val items: Array<TransactionItem>,
     val coupons: Array<TransactionCoupon>,
     val isCashless: Boolean,
