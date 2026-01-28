@@ -5,4 +5,5 @@ class TransactionItem (
     var price: Int,
     var amount: Int,
     var discountAmount: Int,
+    var note: String
 )

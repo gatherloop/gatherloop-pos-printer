@@ -12,6 +12,11 @@ class OrderSlip(val printer: Printer, val transaction: Transaction) {
 
         transaction.items.forEach { item ->
             printer.printTextLine("${item.name} x ${item.amount}", Align.LEFT, true)
+
+            if (item.note != "") {
+                printer.printTextLine(item.note, Align.LEFT, true)
+            }
+
             printer.feed()
         }
 
