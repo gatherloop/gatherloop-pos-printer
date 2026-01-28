@@ -20,6 +20,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -36,8 +37,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bluetoothManager: BluetoothManager
     private lateinit var printerServer: PrinterServer
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @RequiresPermission(Manifest.permission.BLUETOOTH_CONNECT)
     override fun onCreate(savedInstanceState: Bundle?) {
+        val filter = IntentFilter("printer_server_error")
+        registerReceiver(errorReceiver, filter, Context.RECEIVER_NOT_EXPORTED)
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
@@ -46,6 +51,9 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+
 
         spinnerDeviceName = findViewById(R.id.spinner_device_name)
         editTextPort = findViewById(R.id.edit_text_port)
@@ -81,6 +89,11 @@ class MainActivity : AppCompatActivity() {
         } else {
             initializeBluetooth()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(errorReceiver)
     }
 
     private fun isServiceRunning(serviceClass: Class<*>): Boolean {
@@ -150,18 +163,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this@MainActivity, "Printer Server Error: $errorMessage", Toast.LENGTH_LONG).show()
             stopServer()
         }
-    }
-
-    @SuppressLint("UnspecifiedRegisterReceiverFlag")
-    override fun onResume() {
-        super.onResume()
-        val filter = IntentFilter("com.example.printer.ERROR")
-        registerReceiver(errorReceiver, filter)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        unregisterReceiver(errorReceiver)
     }
 
     private fun stopServer() {
