@@ -26,11 +26,14 @@ class PrinterServer(private val context: Service, port: Int, private val printer
                     val invoice = Invoice(printer, printRequest.transaction)
                     invoice.print()
                 } else if (printRequest.type == PrintType.ORDER_SLIP) {
-                    val orderSlip = OrderSlip(printer, printRequest.transaction)
+                    val orderSlip = OrderSlip(printer, printRequest.orderSlip)
                     orderSlip.print()
                 } else if (printRequest.type == PrintType.PURCHASE_LIST) {
                     val purchaseListNote = PurchaseListNote(printer, printRequest.purchaseList)
                     purchaseListNote.print()
+                } else if (printRequest.type == PrintType.CHECKIN_SLIP) {
+                    val checkinSlip = CheckinSlip(printer, printRequest.checkin)
+                    checkinSlip.print()
                 }
 
                 Thread.sleep(1000)

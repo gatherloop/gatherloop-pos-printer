@@ -3,11 +3,14 @@ package com.example.printer
 enum class PrintType {
     INVOICE,
     ORDER_SLIP,
-    PURCHASE_LIST
+    PURCHASE_LIST,
+    CHECKIN_SLIP
 }
 
 data class PrintRequest(
     val type: PrintType,
     val transaction: Transaction,
-    val purchaseList: PurchaseList
+    val orderSlip: OrderSlipPayload,
+    val purchaseList: PurchaseList,
+    val checkin: Checkin
 )
