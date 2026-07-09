@@ -2,10 +2,10 @@ package com.example.printer
 
 class Invoice(val printer: Printer, val transaction: Transaction) {
     fun print() {
-        printer.printTextLine("Gatherloop Cafe & Board Game", Align.CENTER, true)
+        printer.printTextLine("Gatherloop Board Game Cafe", Align.CENTER, true)
         printer.printTextLine("New Kraksaan Land, Blok G16", Align.CENTER)
         printer.printTextLine("Kraksaan, Probolinggo", Align.CENTER)
-        printer.printTextLine("Instagram @gatherloop", Align.CENTER)
+        printer.printTextLine("Instagram & Tiktok : @gatherloop", Align.CENTER)
 
         printer.printTextLine("------------------------------", Align.CENTER)
         printer.printTextLine("Waktu Transaksi", Align.CENTER, true)
