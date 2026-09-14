@@ -1,4 +1,8 @@
-package com.example.printer
+package com.example.printer.View
+
+import com.example.printer.Align
+import com.example.printer.Data.PurchaseList
+import com.example.printer.Printer
 
 class PurchaseListNote(val printer: Printer, val purchaseList: PurchaseList) {
     fun print() {

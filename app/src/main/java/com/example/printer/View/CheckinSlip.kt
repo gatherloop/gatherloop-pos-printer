@@ -1,4 +1,8 @@
-package com.example.printer
+package com.example.printer.View
+
+import com.example.printer.Align
+import com.example.printer.Data.Checkin
+import com.example.printer.Printer
 
 class CheckinSlip(val printer: Printer, val checkin: Checkin) {
     fun print() {
@@ -7,11 +11,9 @@ class CheckinSlip(val printer: Printer, val checkin: Checkin) {
 
         printer.printTextLine("Gatherloop Board Game Cafe", Align.CENTER, true)
         printer.printTextLine("New Kraksaan Land, Blok G16", Align.CENTER)
-        printer.printTextLine("Kraksaan, Probolinggo", Align.CENTER)
         printer.printTextLine("Instagram & Tiktok @gatherloop", Align.CENTER)
 
         printer.printTextLine("------------------------------", Align.CENTER)
-        printer.printTextTwoColumn("Nama", checkin.name)
         printer.printTextTwoColumn("Waktu Checkin", checkin.createdAt)
         printer.printTextTwoColumn("Jumlah Pemain", checkin.tickets.size.toString())
         printer.printTextLine("------------------------------", Align.CENTER)

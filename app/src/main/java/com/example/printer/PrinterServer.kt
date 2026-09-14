@@ -3,6 +3,12 @@ package com.example.printer
 import android.app.Service
 import android.content.Intent
 import android.util.Log
+import com.example.printer.Data.PrintRequest
+import com.example.printer.Data.PrintType
+import com.example.printer.View.CheckinSlip
+import com.example.printer.View.Invoice
+import com.example.printer.View.OrderSlip
+import com.example.printer.View.PurchaseListNote
 import org.java_websocket.server.WebSocketServer
 import org.java_websocket.handshake.ClientHandshake
 import org.java_websocket.WebSocket

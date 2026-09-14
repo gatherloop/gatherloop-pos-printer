@@ -1,20 +1,19 @@
-package com.example.printer
+package com.example.printer.View
+
+import com.example.printer.Align
+import com.example.printer.Data.Transaction
+import com.example.printer.Printer
 
 class Invoice(val printer: Printer, val transaction: Transaction) {
     fun print() {
         printer.printTextLine("Gatherloop Board Game Cafe", Align.CENTER, true)
         printer.printTextLine("New Kraksaan Land, Blok G16", Align.CENTER)
-        printer.printTextLine("Kraksaan, Probolinggo", Align.CENTER)
-        printer.printTextLine("Instagram & Tiktok : @gatherloop", Align.CENTER)
+        printer.printTextLine("Instagram & Tiktok @gatherloop", Align.CENTER)
 
         printer.printTextLine("------------------------------", Align.CENTER)
-        printer.printTextLine("Waktu Transaksi", Align.CENTER, true)
-        printer.printTextLine(transaction.createdAt, Align.CENTER)
-
-        if (transaction.paidAt != null) {
-            printer.printTextLine("Waktu Pembayaran", Align.CENTER, true)
-            printer.printTextLine(transaction.paidAt, Align.CENTER)
-        }
+        printer.printTextTwoColumn("Nomor", "#${transaction.transactionNumber}")
+        printer.printTextTwoColumn("Waktu", transaction.createdAt)
+        printer.printTextTwoColumn("Nama", transaction.name)
         printer.printTextLine("------------------------------", Align.CENTER)
 
 
@@ -48,9 +47,6 @@ class Invoice(val printer: Printer, val transaction: Transaction) {
             printer.printTextTwoColumn("Kembalian", "Rp. ${transaction.getChangeMoney()}")
         }
 
-        printer.printTextLine("------------------------------", Align.CENTER)
-        printer.printTextLine("Terimakasih Kak ${transaction.name}", Align.CENTER)
-        printer.feed()
         printer.feed()
         printer.feed()
     }

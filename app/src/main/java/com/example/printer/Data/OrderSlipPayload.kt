@@ -1,4 +1,4 @@
-package com.example.printer
+package com.example.printer.Data
 
 data class OrderSlipPayloadItemsData(
     val name: String,
@@ -19,7 +19,8 @@ data class OrderSlipPayload(
     val createdAt: String,
     val paidAt: String?,
     val name: String,
-    val orderNumber: Int,
+    val transactionNumber: Int,
+    val pagerNumber: Int,
     val items: OrderSlipPayloadItems,
 ) {
 

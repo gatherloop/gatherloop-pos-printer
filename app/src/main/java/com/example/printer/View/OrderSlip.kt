@@ -1,12 +1,21 @@
-package com.example.printer
+package com.example.printer.View
+
+import com.example.printer.Align
+import com.example.printer.Data.OrderSlipPayload
+import com.example.printer.Printer
 
 class OrderSlip(val printer: Printer, val orderSlip: OrderSlipPayload) {
     fun print() {
         printer.feed()
         printer.feed()
 
+        printer.printTextLine("#${orderSlip.transactionNumber}", Align.CENTER, true)
+
         printer.printTextTwoColumn("Nama", orderSlip.name)
-        printer.printTextTwoColumn("No. Order", orderSlip.orderNumber.toString())
+        if (orderSlip.pagerNumber > 0) {
+            printer.printTextTwoColumn("No. Pager", orderSlip.pagerNumber.toString())
+        }
+
         printer.printTextTwoColumn("Waktu Transaksi", orderSlip.createdAt)
         printer.printTextLine("------------------------------", Align.CENTER)
 

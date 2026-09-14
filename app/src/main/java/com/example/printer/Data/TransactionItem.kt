@@ -1,4 +1,4 @@
-package com.example.printer
+package com.example.printer.Data
 
 class TransactionItem (
     var name: String,

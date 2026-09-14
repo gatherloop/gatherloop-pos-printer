@@ -1,4 +1,4 @@
-package com.example.printer
+package com.example.printer.Data
 
 data class PurchaseListItem (
     val materialName: String,
